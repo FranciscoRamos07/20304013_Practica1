@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // try
 
 let tasks = [
   { id: 1, title: "Task 1", description: "Do something" },
