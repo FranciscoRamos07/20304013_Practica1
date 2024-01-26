@@ -3,9 +3,10 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const port = 3000;
-
-app.use(bodyParser.json());
-
+//se van a quitar comentarios pero yo los voy a dejar jeje
+// otra linea jeje
+// y otra jeje
+app.use(bodyParser.json()); // try 01
 let tasks = [
   { id: 1, title: "Task 1", description: "Do something" },
   { id: 2, title: "Task 2", description: "Do something else" },
@@ -15,6 +16,8 @@ let tasks = [
 app.get("/tasks", (req, res) => {
   res.json(tasks);
 });
+
+//otro cambio de codigo para feature03
 
 // Get a specific task
 app.get("/tasks/:id", (req, res) => {
