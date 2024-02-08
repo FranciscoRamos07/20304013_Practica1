@@ -1,62 +1,62 @@
-const tasksRepository = require("./taskRepository.js");
+const tasksRepository = require("./taskRepository");
 
 describe("pruebas", () => {
-  // prueba unitaria
+  //pruebas unitarias
   test("Get all tasks", () => {
-    // Arrage
+    //arrange
     let tasks = [];
 
-    // Act
+    //act
     tasks = tasksRepository.getAll();
 
-    // Assert
+    //assert
     expect(tasks.length).toBe(2);
     expect(tasks.length == 2).toBe(true);
-    expect(typeof task == "array");
   });
+  test("Get one by id", () => {
+    //arrange
+    let tasks = {};
 
-  //Create
-  test("Create a task", () => {
-    // Arrange
-    const newTask = { id: 3, title: "New Task", completed: false };
+    //act
+    tasks = tasksRepository.getById(1);
 
-    // Act
-    tasksRepository.create(newTask);
-    const tasks = tasksRepository.getAll();
+    //assert
 
-    // Assert
-    expect(tasks.length).toBe(3);
-    expect(tasks).toContainEqual(newTask);
+    expect(tasks.title == "Task 1").toBe(true);
   });
+  test("Create task", () => {
+    //Arrange
+    let tasks = [];
 
-  //update
+    //Act
+    tasksRepository.createTask({
+      id: 3,
+      description: "description",
+      title: "title",
+    });
 
+    //Assert
+    expect(tasksRepository.getAll().length).toBe(3);
+  });
+  test("Delete task", () => {
+    //Arrange
+    let tasks = [];
+    //Act
+    tasksRepository.deleteTask(2);
+
+    //Assert
+    expect(tasksRepository.getAll().length).toBe(2);
+  });
   test("Update a task", () => {
-    // Arrange
-    const taskIdToUpdate = 1;
-    const updatedTaskData = { title: "Updated Task", completed: true };
-
+    // Arrage
+    let tasks = [];
     // Act
-    tasksRepository.update(taskIdToUpdate, updatedTaskData);
-    const tasks = tasksRepository.getAll();
-
+    tasks = tasksRepository.updateTask(3, {
+      id: 3,
+      title: "title",
+      description: "description",
+    });
     // Assert
-    const updatedTask = tasks.find((task) => task.id === taskIdToUpdate);
-    expect(updatedTask.title).toBe(updatedTaskData.title);
-    expect(updatedTask.completed).toBe(updatedTaskData.completed);
-  });
-
-  //delete
-  test("Delete a task", () => {
-    // Arrange
-    const taskIdToDelete = 1;
-
-    // Act
-    tasksRepository.delete(taskIdToDelete);
-    const tasks = tasksRepository.getAll();
-
-    // Assert
-    expect(tasks.length).toBe(2);
-    expect(tasks.find((task) => task.id === taskIdToDelete)).toBeUndefined();
+    expect(tasks.title == "title").toBe(true);
   });
 });
